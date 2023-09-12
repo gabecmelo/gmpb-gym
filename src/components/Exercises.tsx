@@ -1,6 +1,7 @@
 import React from 'react'
+import { Props } from '../utils/types'
 
-function Exercises() {
+function Exercises({setExercises, bodyPart, setBodyPart}: Props) {
   return (
     <div>Exercises</div>
   )
