@@ -12,8 +12,6 @@ function HorizontalScrollBar({ data, bodyPart, setBodyPart }: Props) {
   return (
     <div>
       {data.map((item) => {
-        console.log(item);
-
         const id = uuidv4();
         return (<Box
           key={id}

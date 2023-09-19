@@ -1,4 +1,3 @@
-import React from 'react'
 import { Props } from '../utils/types'
 
 function Exercises({setExercises, bodyPart, setBodyPart}: Props) {

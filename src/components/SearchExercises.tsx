@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { exerciseOptions, fetchData } from '../utils/fetchData';
 import HorizontalScrollBar from './HorizontalScrollBar';
 import { Props } from '../utils/types';
+import { portugueseWords, translateWord } from '../utils/translateWord';
 
 function SearchExercises({setExercises, bodyPart, setBodyPart }: Props) {
 
@@ -20,13 +21,16 @@ function SearchExercises({setExercises, bodyPart, setBodyPart }: Props) {
 
   const handleSearch = async () => {
     if (search) {
+      const normalizedSearch = search.normalize("NFKD").replace(/[\u0300-\u036f]/g, '')            
+      const translatedWord = portugueseWords.includes(normalizedSearch) ? translateWord(normalizedSearch) : search
       const exercisesData = await fetchData('https://exercisedb.p.rapidapi.com/exercises', exerciseOptions);
       const searchedExercises = exercisesData.filter((exercise: any) => (
-        exercise.bodyPart.toLowerCase().includes(search)
+        exercise.bodyPart.toLowerCase().includes(translatedWord)
       ));
 
       setSearch('');
       setExercises(searchedExercises);
+      console.log(searchedExercises);            
     }
   }
 
